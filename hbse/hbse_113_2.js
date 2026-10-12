@@ -13,7 +13,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 此論認為依據基因源生原則（epigenetic principle），個體人生發展任務具有不可逆特色" }
       ],
       answer: "B",
-      exp: "解析：(B)\nErikson 主張個體依循固定的八大漸成階段發展，各階段皆有其核心衝突與心理社會危機，調適解決後方能推進至下一階段。"
+      exp: "解析：(B)\\nErikson 主張個體依循固定的八大漸成階段發展，各階段皆有其核心衝突與心理社會危機，調適解決後方能推進至下一階段。"
     },
     {
       id: 2, stage: "成年中期",
@@ -25,7 +25,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 老年期" }
       ],
       answer: "C",
-      exp: "解析：(C)\n成年中期核心發展任務為「生產繁衍 vs. 停滯（Generativity vs. Stagnation）」，著重於培育下一代與增進社會福祉。"
+      exp: "解析：(C)\\n成年中期核心發展任務為「生產繁衍 vs. 停滯（Generativity vs. Stagnation）」，著重於培育下一代與增進社會福祉。"
     },
     {
       id: 3, stage: "兒童早期",
@@ -37,7 +37,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 桑代克（E. Thorndike）" }
       ],
       answer: "B",
-      exp: "解析：(B)\n皮亞傑深入觀察兒童在彈珠遊戲中對規則的理解與實踐，並將遊戲譽為最可佩的社會制度，藉以建構認知道德發展論。"
+      exp: "解析：(B)\\n皮亞傑深入觀察兒童在彈珠遊戲中對規則的理解與實踐，並將遊戲譽為最可佩的社會制度，藉以建構認知道德發展論。"
     },
     {
       id: 4, stage: "綜合／社會環境",
@@ -49,7 +49,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 出自個人良知原則的道德（morality of individual principles of conscience）" }
       ],
       answer: "D",
-      exp: "解析：(D)\n普遍倫理原則/良知原則（第六階段）：行為依循普世正義、人權尊嚴與崇高道德良知，當實定法律違背良知時採取非暴力抵抗。"
+      exp: "解析：(D)\\n普遍倫理原則/良知原則（第六階段）：行為依循普世正義、人權尊嚴與崇高道德良知，當實定法律違背良知時採取非暴力抵抗。"
     },
     {
       id: 5, stage: "綜合／社會環境",
@@ -61,7 +61,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 危機發生後的調適期指的是壓力源因為累積導致需求增加時，若家庭的因應資源（bB）無增加對壓力事件的看法（cC）並無改變的話，就會導致家庭危機（xX）" }
       ],
       answer: "C",
-      exp: "解析：(C)\ncC 因素包含對累積壓力源（aA）、既有與新資源（bB）以及對「原先危機事件 X」之後續界定與整體調適評估，非單純此次危機。"
+      exp: "解析：(C)\\ncC 因素包含對累積壓力源（aA）、既有與新資源（bB）以及對「原先危機事件 X」之後續界定與整體調適評估，非單純此次危機。"
     },
     {
       id: 6, stage: "綜合／社會環境",
@@ -73,7 +73,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 對角色的滿意程度" }
       ],
       answer: "B",
-      exp: "解析：(B)\n角色評估重點在於權力結構、角色期待、角色分工、相互滿意度與指派任務；家庭成員人數為人口學基本資料，非角色動態評估核心。"
+      exp: "解析：(B)\\n角色評估重點在於權力結構、角色期待、角色分工、相互滿意度與指派任務；家庭成員人數為人口學基本資料，非角色動態評估核心。"
     },
     {
       id: 7, stage: "老年期",
@@ -85,7 +85,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 晚期的家庭生活階段" }
       ],
       answer: "D",
-      exp: "解析：(D)\n晚期家庭階段（老年期）的核心任務為接受代間角色的轉移（支持中壯世代成為核心）、面對老化失落與回顧生命智慧。"
+      exp: "解析：(D)\\n晚期家庭階段（老年期）的核心任務為接受代間角色的轉移（支持中壯世代成為核心）、面對老化失落與回顧生命智慧。"
     },
     {
       id: 8, stage: "綜合／社會環境",
@@ -97,7 +97,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 女性主義只解決女性的困境問題" }
       ],
       answer: "B",
-      exp: "解析：(B)\n社會主義女性主義結合資本主義與父權體制批判，強調經濟階級與勞動正義。"
+      exp: "解析：(B)\\n社會主義女性主義結合資本主義與父權體制批判，強調經濟階級與勞動正義。"
     },
     {
       id: 9, stage: "學齡期",
@@ -109,11 +109,11 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 霸凌是學校成員之間互動的必然結果" }
       ],
       answer: "D",
-      exp: "解析：(D)\n功能論強調整合、規範與功能維持，將嚴重偏差與霸凌視為失功能（Dysfunction），非系統互動之「必然結果」。"
+      exp: "解析：(D)\\n功能論強調整合、規範與功能維持，將嚴重偏差與霸凌視為失功能（Dysfunction），非系統互動之「必然結果」。"
     },
     {
       id: 10, stage: "綜合／社會環境",
-      text: "10. 有關生態理論假設的敘述，下列何者錯誤?",
+      text: "10. 有關生態理論假設的敘述，下列何者錯誤？",
       options: [
         { key: "A", text: "(A) 人們會積極參與環境和自身發展" },
         { key: "B", text: "(B) 人有能力能夠適應環境的改變" },
@@ -121,7 +121,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 生態理論重視案主自身的生理疾病訊息" }
       ],
       answer: "D",
-      exp: "解析：(D)\n生態系統理論著重於「人在情境中（PIE）」的互動配搭與環境資源網絡，而非將問題焦點單純侷限在案主個人的生理病理。"
+      exp: "解析：(D)\\n生態系統理論著重於「人在情境中（PIE）」的互動配搭與環境資源網絡，而非將問題焦點單純侷限在案主個人的生理病理。"
     },
     {
       id: 11, stage: "嬰幼兒期",
@@ -133,7 +133,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 照顧者對於嬰兒焦慮難過時，應該保持距離，等嬰兒滿足時再注意他" }
       ],
       answer: "B",
-      exp: "解析：(B)\n安全依附型幼兒將主要照顧者視為探索外在的安全基地（Secure base），受挫時會主動尋求安慰且能迅速平復。"
+      exp: "解析：(B)\\n安全依附型幼兒將主要照顧者視為探索外在的安全基地（Secure base），受挫時會主動尋求安慰且能迅速平復。"
     },
     {
       id: 12, stage: "青少年期",
@@ -145,7 +145,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 兒童期發展階段為道德成規後期（postconventional）" }
       ],
       answer: "A",
-      exp: "解析：(A)\n青少年期心理社會危機為自我認同 vs. 角色混淆（Identity vs. Role Confusion）。"
+      exp: "解析：(A)\\n青少年期心理社會危機為自我認同 vs. 角色混淆（Identity vs. Role Confusion）。"
     },
     {
       id: 13, stage: "綜合／社會環境",
@@ -157,7 +157,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 各界應支持友善職場，保障新住民就業權益" }
       ],
       answer: "A",
-      exp: "解析：(A)\n新住民社會支持網絡可由家庭、社區組織、學校與政府體系共同建構，非僅侷限於同鄉。"
+      exp: "解析：(A)\\n新住民社會支持網絡可由家庭、社區組織、學校與政府體系共同建構，非僅侷限於同鄉。"
     },
     {
       id: 14, stage: "綜合／社會環境",
@@ -169,7 +169,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) ②③④" }
       ],
       answer: "A",
-      exp: "解析：(A)\n恐同症（Homophobia）廣泛存在於各社會階層與文化中，非特定專業人員獨有。"
+      exp: "解析：(A)\\n恐同症（Homophobia）廣泛存在於各社會階層與文化中，非特定專業人員獨有。"
     },
     {
       id: 15, stage: "綜合／社會環境",
@@ -181,7 +181,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 穿著較清涼是遭致性騷擾的主要原因" }
       ],
       answer: "C",
-      exp: "解析：(C)\n依性別平等教育法規定，學校應設性別平等教育委員會處理校園性別事件；(D)將責任歸咎於被害人穿著為錯誤迷思。"
+      exp: "解析：(C)\\n依性別平等教育法規定，學校應設性別平等教育委員會處理校園性別事件；(D)將責任歸咎於被害人穿著為錯誤迷思。"
     },
     {
       id: 16, stage: "嬰幼兒期",
@@ -193,7 +193,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) ①③④" }
       ],
       answer: "B",
-      exp: "解析：(B)\n嬰幼兒頸部肌肉發育不全，外力劇烈晃動會造成硬腦膜下出血及嚴重腦損，多因照顧者挫折失控所致。"
+      exp: "解析：(B)\\n嬰幼兒頸部肌肉發育不全，外力劇烈晃動會造成硬腦膜下出血及嚴重腦損，多因照顧者挫折失控所致。"
     },
     {
       id: 17, stage: "綜合／社會環境",
@@ -205,7 +205,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 撫育（nurturing）系統" }
       ],
       answer: "D",
-      exp: "解析：(D)\n雙元觀點（Dual Perspective）區分撫育系統（Nurturing system，個人原生家庭、鄰里與宗教生活圈）與維持系統（Sustaining system，主流社會體制）。"
+      exp: "解析：(D)\\n雙元觀點（Dual Perspective）區分撫育系統（Nurturing system，個人原生家庭、鄰里與宗教生活圈）與維持系統（Sustaining system，主流社會體制）。"
     },
     {
       id: 18, stage: "老年期",
@@ -217,7 +217,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 失落為導向的調適模式（loss-oriented coping model）" }
       ],
       answer: "C",
-      exp: "解析：(C)\n雙程調適模式（Dual Process Model）：復原導向調適聚焦於處理生活次級改變、扮演新角色與重構日常運作。"
+      exp: "解析：(C)\\n雙程調適模式（Dual Process Model）：復原導向調適聚焦於處理生活次級改變、扮演新角色與重構日常運作。"
     },
     {
       id: 19, stage: "胎兒期",
@@ -229,7 +229,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 顯性基因" }
       ],
       answer: "C",
-      exp: "解析：(C)\n髮色、膚色等多屬多基因交互遺傳與互動影響（Polygenic inheritance / Interactive genes）。"
+      exp: "解析：(C)\\n髮色、膚色等多屬多基因交互遺傳與互動影響（Polygenic inheritance / Interactive genes）。"
     },
     {
       id: 20, stage: "嬰幼兒期",
@@ -241,7 +241,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 比手畫腳→咕咕聲→喃喃發聲" }
       ],
       answer: "B",
-      exp: "解析：(B)\n嬰幼兒語言發展里程碑：出生哭聲 ➔ 2-4個月發咕咕聲/笑 ➔ 6-8個月牙牙發聲/喃喃發聲 ➔ 9-12個月手勢與比手畫腳溝通。"
+      exp: "解析：(B)\\n嬰幼兒語言發展里程碑：出生哭聲 ➔ 2-4個月發咕咕聲/笑 ➔ 6-8個月牙牙發聲/喃喃發聲 ➔ 9-12個月手勢與比手畫腳溝通。"
     },
     {
       id: 21, stage: "老年期",
@@ -253,7 +253,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 堆積理論、自由基理論" }
       ],
       answer: "D",
-      exp: "解析：(D)\n隨機損害/破壞理論（Stochastic theories）包含自由基理論、有害物質堆積理論、磨損理論與災變錯誤理論。"
+      exp: "解析：(D)\\n隨機損害/破壞理論（Stochastic theories）包含自由基理論、有害物質堆積理論、磨損理論與災變錯誤理論。"
     },
     {
       id: 22, stage: "胎兒期",
@@ -265,7 +265,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 骨骼從懷孕後第三個月開始發育" }
       ],
       answer: "B",
-      exp: "解析：(B)\n胎兒表皮脊紋及指紋在妊娠約 10-17 週（懷孕第三至第四個月）即已定型形成。"
+      exp: "解析：(B)\\n胎兒表皮脊紋及指紋在妊娠約 10-17 週（懷孕第三至第四個月）即已定型形成。"
     },
     {
       id: 23, stage: "綜合／社會環境",
@@ -277,7 +277,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 鉅視系統（macrosystems）" }
       ],
       answer: "B",
-      exp: "解析：(B)\n生態系統層次為微視系統、中介系統（Mesosystem）、外部系統與鉅視系統；次級系統為一般系統論名詞。"
+      exp: "解析：(B)\\n生態系統層次為微視系統、中介系統（Mesosystem）、外部系統與鉅視系統；次級系統為一般系統論名詞。"
     },
     {
       id: 24, stage: "兒童早期",
@@ -289,7 +289,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 35 至 65 歲：完美無憾 vs.悲觀絕望" }
       ],
       answer: "A",
-      exp: "解析：(A)\n(B) 3-6 歲為自主開創 vs. 內疚罪惡；(C) 11-18 歲為自我認同 vs. 混淆；(D) 35-65 歲為生產繁衍 vs. 停滯。"
+      exp: "解析：(A)\\n(B) 3-6 歲為自主開創 vs. 內疚罪惡；(C) 11-18 歲為自我認同 vs. 混淆；(D) 35-65 歲為生產繁衍 vs. 停滯。"
     },
     {
       id: 25, stage: "成年中期",
@@ -301,7 +301,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 經驗性智力（experiential intelligence）" }
       ],
       answer: "A",
-      exp: "解析：(A)\n晶體智力（結晶智力）仰賴後天文化、教育與生活經驗累積，隨年齡增長通常能保持甚至提升。"
+      exp: "解析：(A)\\n晶體智力（結晶智力）仰賴後天文化、教育與生活經驗累積，隨年齡增長通常能保持甚至提升。"
     },
     {
       id: 26, stage: "學齡前期",
@@ -313,7 +313,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 嬰幼兒期" }
       ],
       answer: "A",
-      exp: "解析：(A)\nKohlberg 性別認知三階段：性別穩定（約3-4歲學齡前期）了解性別不會隨時間改變，但仍依賴外在表徵與刻板印象判斷。"
+      exp: "解析：(A)\\nKohlberg 性別認知三階段：性別穩定（約3-4歲學齡前期）了解性別不會隨時間改變，但仍依賴外在表徵與刻板印象判斷。"
     },
     {
       id: 27, stage: "學齡期",
@@ -325,7 +325,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 社會學習理論" }
       ],
       answer: "D",
-      exp: "解析：(D)\n班杜拉社會學習理論／差別結合論強調偏差行為是在親近同儕互動中透過觀察、模仿與合理化過程學習習得。"
+      exp: "解析：(D)\\n班杜拉社會學習理論／差別結合論強調偏差行為是在親近同儕互動中透過觀察、模仿與合理化過程學習習得。"
     },
     {
       id: 28, stage: "學齡期",
@@ -337,7 +337,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 社會交換論" }
       ],
       answer: "C",
-      exp: "解析：(C)\n塞利格曼習得無助感（Learned Helplessness）：將失敗歸咎於內部穩定因素（自己能力差），將成功歸咎於外部偶然因素（運氣好）。"
+      exp: "解析：(C)\\n塞利格曼習得無助感（Learned Helplessness）：將失敗歸咎於內部穩定因素（自己能力差），將成功歸咎於外部偶然因素（運氣好）。"
     },
     {
       id: 29, stage: "學齡期",
@@ -349,7 +349,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 過動症：注意力不集中，易衝動" }
       ],
       answer: "D",
-      exp: "解析：(D)\n注意力不足過動症（ADHD）屬於神經發展疾患（Neurodevelopmental disorder），非焦慮症範疇。"
+      exp: "解析：(D)\\n注意力不足過動症（ADHD）屬於神經發展疾患（Neurodevelopmental disorder），非焦慮症範疇。"
     },
     {
       id: 30, stage: "成年中期",
@@ -361,7 +361,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 寬恕雖有解放情緒的效果，但不等同放下對某人的敵意或攻擊" }
       ],
       answer: "C",
-      exp: "解析：(C)\n心理學上的寬恕涉及內部認知重構與情緒轉化；寬恕是受害者的內在心理歷程，和解則需要雙方互動。"
+      exp: "解析：(C)\\n心理學上的寬恕涉及內部認知重構與情緒轉化；寬恕是受害者的內在心理歷程，和解則需要雙方互動。"
     },
     {
       id: 31, stage: "胎兒期",
@@ -373,7 +373,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 使用背帶有助於提供親子緊密互動的機會" }
       ],
       answer: "A",
-      exp: "解析：(A)\n多數產婦僅經歷短暫的產後情緒低落（Baby blues），產後憂鬱症（Postpartum Depression）發生率約 10-15%，非必然罹患。"
+      exp: "解析：(A)\\n多數產婦僅經歷短暫的產後情緒低落（Baby blues），產後憂鬱症（Postpartum Depression）發生率約 10-15%，非必然罹患。"
     },
     {
       id: 32, stage: "綜合／社會環境",
@@ -385,7 +385,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 繼親家長在和孩子建立關係時，須考量性別和個別差異，來探索適當的互動之道" }
       ],
       answer: "A",
-      exp: "解析：(A)\n重組家庭穩固的基石為強健的夫妻次系統，過度以子女為中心而忽視伴侶關係將損害家庭系統穩定。"
+      exp: "解析：(A)\\n重組家庭穩固的基石為強健的夫妻次系統，過度以子女為中心而忽視伴侶關係將損害家庭系統穩定。"
     },
     {
       id: 33, stage: "學齡前期",
@@ -397,7 +397,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 漠不關心型（uninvolved）" }
       ],
       answer: "B",
-      exp: "解析：(B)\n專制獨裁型教養（Authoritarian）：高要求、低回應，強調絕對服從與嚴格控制，缺乏雙向協商空間。"
+      exp: "解析：(B)\\n專制獨裁型教養（Authoritarian）：高要求、低回應，強調絕對服從與嚴格控制，缺乏雙向協商空間。"
     },
     {
       id: 34, stage: "嬰幼兒期",
@@ -409,7 +409,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 觀察嬰幼兒習慣的建立，測量他們摒棄舊習慣所需要的時間和過程" }
       ],
       answer: "B",
-      exp: "解析：(B)\n去習慣化（Dishabituation）：嬰兒對熟悉刺激適應（習慣化）後，當呈現新刺激時，其注意力與反應重新恢復上升的現象。"
+      exp: "解析：(B)\\n去習慣化（Dishabituation）：嬰兒對熟悉刺激適應（習慣化）後，當呈現新刺激時，其注意力與反應重新恢復上升的現象。"
     },
     {
       id: 35, stage: "綜合／社會環境",
@@ -421,7 +421,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 同性戀者不會有發生強暴與性侵害的風險" }
       ],
       answer: "A",
-      exp: "解析：(A)\n任何性別年齡皆可能受害；統計指出加害者以熟人佔大多數，且受害者常見創傷性自責內疚。"
+      exp: "解析：(A)\\n任何性別年齡皆可能受害；統計指出加害者以熟人佔大多數，且受害者常見創傷性自責內疚。"
     },
     {
       id: 36, stage: "成年早期",
@@ -433,7 +433,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 由企業透過諮商及教育方案，協助員工協調工作與家庭雙重角色產生之壓力" }
       ],
       answer: "B",
-      exp: "解析：(B)\n「強制」教育訓練會額外增加受僱員工的負擔與時間壓力，無助於舒緩工作與家庭衝突。"
+      exp: "解析：(B)\\n「強制」教育訓練會額外增加受僱員工的負擔與時間壓力，無助於舒緩工作與家庭衝突。"
     },
     {
       id: 37, stage: "老年期",
@@ -445,7 +445,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 以該新住民高齡長者之家庭整體，作為評估照顧服務需求之範圍" }
       ],
       answer: "C",
-      exp: "解析：(C)\n文化謙遜要求專業人員提供通譯與友善母語服務，而非強迫高齡案主接受同化式的本國語言教育。"
+      exp: "解析：(C)\\n文化謙遜要求專業人員提供通譯與友善母語服務，而非強迫高齡案主接受同化式的本國語言教育。"
     },
     {
       id: 38, stage: "綜合／社會環境",
@@ -457,7 +457,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 符號互動論" }
       ],
       answer: "C",
-      exp: "解析：(C)\n關注貧富差距對立、資源機會剝奪與民眾發起集體抗爭，為衝突理論（Conflict Theory）典型分析架構。"
+      exp: "解析：(C)\\n關注貧富差距對立、資源機會剝奪與民眾發起集體抗爭，為衝突理論（Conflict Theory）典型分析架構。"
     },
     {
       id: 39, stage: "學齡期",
@@ -469,7 +469,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 中介系統" }
       ],
       answer: "D",
-      exp: "解析：(D)\n考選部公布答案為 (D)。家庭社經條件如何跨系統連結並實質衝擊學校適應與出席，被置於微視系統間關聯（中介系統）之脈絡評估。"
+      exp: "解析：(D)\\n考選部公布答案為 (D)。家庭社經條件如何跨系統連結並實質衝擊學校適應與出席，被置於微視系統間關聯（中介系統）之脈絡評估。"
     },
     {
       id: 40, stage: "成年早期",
@@ -481,7 +481,7 @@ window.QUESTION_FILES.push({
         { key: "D", text: "(D) 社會排除" }
       ],
       answer: "D",
-      exp: "解析：(D)\n社會排除（Social Exclusion）：個體因勞動市場脫節、貧窮及人際網絡斷裂，多面向被主流社會活動與公民參與邊緣化隔離之狀態。"
+      exp: "解析：(D)\\n社會排除（Social Exclusion）：個體因勞動市場脫節、貧窮及人際網絡斷裂，多面向被主流社會活動與公民參與邊緣化隔離之狀態。"
     }
   ]
 });
