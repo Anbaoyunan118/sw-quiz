@@ -38,16 +38,7 @@
       margin-bottom: 20px;
     }
     h1 { margin: 0 0 16px 0; color: var(--primary); font-size: 1.5rem; text-align: center; }
-    
-    .section-label {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--muted);
-      margin-bottom: 6px;
-      display: block;
-    }
-    
-    /* 第一層：科目選單 */
+    .section-label { font-size: 0.85rem; font-weight: 600; color: var(--muted); margin-bottom: 6px; display: block; }
     .subject-wrapper { margin-bottom: 16px; }
     select.subject-select {
       width: 100%;
@@ -60,18 +51,8 @@
       color: var(--primary);
       outline: none;
     }
-
-    /* 第二層：年度切換列 */
-    .year-nav {
-      margin-bottom: 16px;
-      padding-bottom: 12px;
-      border-bottom: 1px dashed var(--border);
-    }
-    .year-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
+    .year-nav { margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px dashed var(--border); }
+    .year-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
     .year-btn {
       padding: 6px 14px;
       border-radius: 8px;
@@ -83,22 +64,9 @@
       cursor: pointer;
       transition: all 0.2s;
     }
-    .year-btn.active, .year-btn:hover {
-      background: var(--primary);
-      color: #fff;
-      border-color: var(--primary);
-    }
-    .year-btn.all-years-btn {
-      font-weight: 600;
-      border-color: #52b788;
-    }
-
-    /* 第三層：階段與錯題篩選 */
-    .filter-nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
+    .year-btn.active, .year-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .year-btn.all-years-btn { font-weight: 600; border-color: #52b788; }
+    .filter-nav { display: flex; flex-wrap: wrap; gap: 6px; }
     .filter-btn {
       padding: 5px 12px;
       border-radius: 18px;
@@ -108,11 +76,7 @@
       cursor: pointer;
       transition: all 0.2s;
     }
-    .filter-btn.active, .filter-btn:hover {
-      background: var(--primary);
-      color: #fff;
-      border-color: var(--primary);
-    }
+    .filter-btn.active, .filter-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
     .filter-btn.wrong-btn { border-color: var(--accent); color: var(--accent); font-weight: 600; }
     .filter-btn.wrong-btn.active, .filter-btn.wrong-btn:hover { background: var(--accent); color: #fff; }
     .badge {
@@ -124,12 +88,7 @@
       font-size: 0.7rem;
       margin-left: 2px;
     }
-    .filter-btn.active .badge, .filter-btn:hover .badge {
-      background: #fff;
-      color: var(--accent);
-    }
-
-    /* 狀態提示列 */
+    .filter-btn.active .badge, .filter-btn:hover .badge { background: #fff; color: var(--accent); }
     .status-bar {
       background: var(--card-bg);
       padding: 12px 18px;
@@ -142,8 +101,6 @@
       font-weight: 500;
       box-shadow: 0 1px 4px rgba(0,0,0,0.04);
     }
-
-    /* 題目卡片 */
     .question-card {
       background: var(--card-bg);
       border-radius: 12px;
@@ -185,7 +142,6 @@
     .option-btn:hover:not(:disabled) { background: #f0f0f0; }
     .option-btn.correct { background: var(--correct-bg)!important; border-color: var(--correct)!important; color: var(--correct); font-weight: bold; }
     .option-btn.wrong { background: var(--wrong-bg)!important; border-color: var(--wrong)!important; color: var(--wrong); }
-    
     .actions { display: flex; gap: 14px; align-items: center; }
     .btn-link { background: none; border: none; font-size: 0.88rem; cursor: pointer; text-decoration: underline; padding: 0; }
     .btn-exp { color: var(--primary); }
@@ -209,7 +165,6 @@
   <header>
     <h1>社工師考古題練習系統</h1>
 
-    <!-- 第 1 層：選擇考科 -->
     <div class="subject-wrapper">
       <span class="section-label">選擇考試科目：</span>
       <select id="subjectSelect" class="subject-select" onchange="onSubjectChange()">
@@ -221,13 +176,11 @@
       </select>
     </div>
 
-    <!-- 第 2 層：選擇年度（支援跨年度全部） -->
     <div class="year-nav">
       <span class="section-label">選擇考題年度：</span>
       <div class="year-buttons" id="yearButtons"></div>
     </div>
 
-    <!-- 第 3 層：篩選階段 / 錯題庫 -->
     <div class="filter-nav-wrapper">
       <span class="section-label">條件篩選：</span>
       <div class="filter-nav" id="filterNav"></div>
@@ -242,25 +195,32 @@
   <main id="quizContainer"></main>
 </div>
 
-<script src="questions.js"></script>
+<!-- ============================================== -->
+<!-- 引用各科目資料夾底下的考卷檔 -->
+<!-- ============================================== -->
+<script src="hbse/hbse_112_1.js"></script>
+<script src="hbse/hbse_112_2.js"></script>
 
 <script>
+// 自動將所有外部檔案彙整
+const QUESTION_BANK = { hbse: {}, sw: {}, direct: {}, research: {}, policy: {} };
+(window.QUESTION_FILES || []).forEach(file => {
+  if (!QUESTION_BANK[file.subject]) QUESTION_BANK[file.subject] = {};
+  QUESTION_BANK[file.subject][file.year] = file.questions;
+});
+
 let wrongList = JSON.parse(localStorage.getItem("sw_master_wrong") || "[]");
 let currentSubject = "hbse";
-let currentYear = "ALL"; // "ALL" 代表全部年度，或特定年度名稱
+let currentYear = "ALL";
 let currentFilter = "全部";
 
-function initApp() {
-  onSubjectChange();
-}
+function initApp() { onSubjectChange(); }
 
-// 提取年度簡稱，例如從 "112年上 (112-1)" 提取 "112-1"
 function formatYearShort(yearStr) {
   const match = yearStr.match(/\((.*?)\)/);
   return match ? match[1] : yearStr;
 }
 
-// 1. 切換科目
 function onSubjectChange() {
   currentSubject = document.getElementById("subjectSelect").value;
   const yearContainer = document.getElementById("yearButtons");
@@ -273,7 +233,6 @@ function onSubjectChange() {
     yearContainer.innerHTML = `<span style="color: var(--muted); font-size: 0.9rem;">此科目尚未匯入年度題目</span>`;
     currentYear = "";
   } else {
-    // 預設加入「全部年度（跨年度）」按鈕
     const allBtn = document.createElement("button");
     allBtn.className = "year-btn all-years-btn active";
     allBtn.textContent = "📚 全部年度 (跨年度做題)";
@@ -295,17 +254,14 @@ function onSubjectChange() {
   renderQuiz();
 }
 
-// 2. 切換年度
 function selectYear(year, btnElement) {
   currentYear = year;
   document.querySelectorAll(".year-btn").forEach(b => b.classList.remove("active"));
   if (btnElement) btnElement.classList.add("active");
-
   setupFilterNav();
   renderQuiz();
 }
 
-// 3. 建立篩選列（人行9大階段 + 錯題庫）
 function setupFilterNav() {
   const nav = document.getElementById("filterNav");
   nav.innerHTML = "";
@@ -313,7 +269,6 @@ function setupFilterNav() {
 
   if (!currentYear) return;
 
-  // 計算該範圍下的錯題數
   const subjectWrongCount = wrongList.filter(item => {
     if (item.subject !== currentSubject) return false;
     if (currentYear === "ALL") return true;
@@ -348,7 +303,6 @@ function setFilter(filterName, btn) {
   renderQuiz();
 }
 
-// 取得當前模式的題庫清單（每題附帶 sourceYear）
 function getCurrentQuestionPool() {
   const subjectData = QUESTION_BANK[currentSubject] || {};
   let pool = [];
@@ -368,7 +322,6 @@ function getCurrentQuestionPool() {
   return pool;
 }
 
-// 4. 渲染題目
 function renderQuiz() {
   const container = document.getElementById("quizContainer");
   const statusText = document.getElementById("currentStatusText");
