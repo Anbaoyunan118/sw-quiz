@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>社工師考古題題庫系統</title>
+  <style>
+    :root {
+      --primary: #2d6a4f;
+      --primary-light: #d8f3dc;
+      --bg: #f4f6f8;
+      --card-bg: #ffffff;
+      --text: #2b2d42;
+      --muted: #6c757d;
+      --correct: #2e7d32;
+      --correct-bg: #e8f5e9;
+      --wrong: #c62828;
+      --wrong-bg: #ffebee;
+      --border: #e0e0e0;
+      --accent: #d90429;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      margin: 0;
+      padding: 16px;
+    }
+    .container { max-width: 860px; margin: 0 auto; }
+    header {
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      margin-bottom: 20px;
+    }
+    h1 { margin: 0 0 12px 0; color: var(--primary); font-size: 1.5rem; text-align: center; }
+    .nav-selectors {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      font-size: 0.95rem;
+      background: #fff;
+    }
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: center;
+      padding-top: 10px;
+      border-top: 1px dashed var(--border);
+    }
+    .filter-btn {
+      padding: 5px 12px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: #fff;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+    .filter-btn.wrong-btn { border-color: var(--accent); color: var(--accent); }
+    .filter-btn.wrong-btn.active, .filter-btn.wrong-btn:hover { background: var(--accent); color: #fff; }
+    .badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 10px;
+      padding: 0 6px;
+      font-size: 0.7rem;
+      margin-left: 2px;
+    }
+    .status-bar {
+      background: var(--card-bg);
+      padding: 10px 16px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .question-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .question-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+    .q-num { font-weight: bold; color: var(--primary); }
+    .tag {
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 2px 8px;
+      border-radius: 14px;
+      font-size: 0.75rem;
+    }
+    .tag-wrong { background: var(--wrong-bg); color: var(--wrong); }
+    .question-text { font-size: 1rem; margin-bottom: 14px; font-weight: 500; }
+    .options-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+    .option-btn {
+      text-align: left;
+      padding: 10px 14px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: #fafafa;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    .option-btn:hover:not(:disabled) { background: #f0f0f0; }
+    .option-btn.correct { background: var(--correct-bg)!important; border-color: var(--correct)!important; color: var(--correct); font-weight: bold; }
+    .option-btn.wrong { background: var(--wrong-bg)!important; border-color: var(--wrong)!important; color: var(--wrong); }
+    .actions { display: flex; gap: 12px; align-items: center; }
+    .btn-link { background: none; border: none; font-size: 0.85rem; cursor: pointer; text-decoration: underline; padding: 0; }
+    .btn-exp { color: var(--primary); }
+    .btn-retry { color: #0277bd; }
+    .btn-remove { color: var(--wrong); margin-left: auto; }
+    .exp-box {
+      display: none;
+      background: #f8f9fa;
+      border-left: 4px solid var(--primary);
+      padding: 12px 14px;
+      margin-top: 12px;
+      font-size: 0.85rem;
+      white-space: pre-line;
+    }
+    .empty-state { text-align: center; padding: 40px; background: #fff; border-radius: 12px; color: var(--muted); }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>社工師考古題線上練習</h1>
+    <div class="nav-selectors">
+      <select id="subjectSelect" onchange="onSubjectChange()">
+        <option value="hbse">人類行為與社會環境</option>
+        <option value="sw">社會工作</option>
+        <option value="direct">社會工作直接服務</option>
+        <option value="research">社會工作研究方法</option>
+        <option value="policy">社會政策與社會立法</option>
+      </select>
+      <select id="yearSelect" onchange="onYearChange()"></select>
+    </div>
+    <div class="filter-bar" id="filterBar"></div>
+  </header>
+
+  <div class="status-bar">
+    <span id="currentStatusText">載入中...</span>
+    <span id="currentCountText"></span>
+  </div>
+
+  <main id="quizContainer"></main>
+</div>
+
+<!-- 引用獨立題庫檔 -->
+<script src="questions.js"></script>
+
+<script>
+let wrongList = JSON.parse(localStorage.getItem("sw_master_wrong") || "[]");
+let currentSubject = "hbse";
+let currentYear = "";
+let currentFilter = "全部";
+
+function initApp() {
+  onSubjectChange();
+}
+
+function onSubjectChange() {
+  currentSubject = document.getElementById("subjectSelect").value;
+  const yearSelect = document.getElementById("yearSelect");
+  yearSelect.innerHTML = "";
+
+  const subjectData = QUESTION_BANK[currentSubject] || {};
+  const years = Object.keys(subjectData);
+
+  if (years.length === 0) {
+    yearSelect.innerHTML = `<option value="">尚未匯入題目</option>`;
+    currentYear = "";
+  } else {
+    years.forEach(y => {
+      const opt = document.createElement("option");
+      opt.value = y;
+      opt.textContent = y;
+      yearSelect.appendChild(opt);
+    });
+    currentYear = years[0];
+  }
+  setupFilterBar();
+  renderQuiz();
+}
+
+function onYearChange() {
+  currentYear = document.getElementById("yearSelect").value;
+  setupFilterBar();
+  renderQuiz();
+}
+
+function setupFilterBar() {
+  const filterBar = document.getElementById("filterBar");
+  filterBar.innerHTML = "";
+  currentFilter = "全部";
+
+  if (!currentYear) return;
+
+  const subjectWrongCount = wrongList.filter(item => item.subject === currentSubject && item.year === currentYear).length;
+
+  let stages = ["全部"];
+  if (currentSubject === "hbse") {
+    stages = ["全部", "胎兒期", "嬰幼兒期", "兒童早期", "學齡前期", "學齡期", "青少年期", "成年早期", "成年中期", "老年期", "綜合／社會環境"];
+  }
+
+  stages.forEach(st => {
+    const btn = document.createElement("button");
+    btn.className = `filter-btn ${st === "全部" ? "active" : ""}`;
+    btn.textContent = st;
+    btn.onclick = (e) => setFilter(st, e.target);
+    filterBar.appendChild(btn);
+  });
+
+  const wrongBtn = document.createElement("button");
+  wrongBtn.className = "filter-btn wrong-btn";
+  wrongBtn.id = "wrongFilterBtn";
+  wrongBtn.innerHTML = `❌ 錯題庫 <span class="badge" id="wrongBadge">${subjectWrongCount}</span>`;
+  wrongBtn.onclick = (e) => setFilter("錯題庫", e.target.closest('button'));
+  filterBar.appendChild(wrongBtn);
+}
+
+function setFilter(filterName, btn) {
+  currentFilter = filterName;
+  document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+  if (btn) btn.classList.add("active");
+  renderQuiz();
+}
+
+function renderQuiz() {
+  const container = document.getElementById("quizContainer");
+  const statusText = document.getElementById("currentStatusText");
+  const countText = document.getElementById("currentCountText");
+  container.innerHTML = "";
+
+  if (!currentYear) {
+    statusText.textContent = "此科目目前尚無題目資料";
+    countText.textContent = "";
+    container.innerHTML = `<div class="empty-state">尚未新增題目，敬請期待！</div>`;
+    return;
+  }
+
+  const allList = (QUESTION_BANK[currentSubject] && QUESTION_BANK[currentSubject][currentYear]) || [];
+  let displayList = [];
+
+  if (currentFilter === "錯題庫") {
+    const currentWrongIds = wrongList
+      .filter(item => item.subject === currentSubject && item.year === currentYear)
+      .map(item => item.id);
+    displayList = allList.filter(q => currentWrongIds.includes(q.id));
+    statusText.textContent = `❌ ${currentYear} 錯題專區`;
+  } else if (currentFilter === "全部") {
+    displayList = allList;
+    statusText.textContent = `${currentYear} 全部題目`;
+  } else {
+    displayList = allList.filter(q => q.stage && q.stage.includes(currentFilter));
+    statusText.textContent = `${currentYear} 階段：${currentFilter}`;
+  }
+
+  countText.textContent = `共 ${displayList.length} 題`;
+
+  if (displayList.length === 0) {
+    container.innerHTML = `<div class="empty-state">目前無符合條件的題目 🎉</div>`;
+    return;
+  }
+
+  displayList.forEach(q => {
+    const isWrong = wrongList.some(item => item.subject === currentSubject && item.year === currentYear && item.id === q.id);
+    const card = document.createElement("div");
+    card.className = "question-card";
+    card.id = `q-${q.id}`;
+
+    card.innerHTML = `
+      <div class="question-meta">
+        <span class="q-num">第 ${q.id} 題</span>
+        ${q.stage ? `<span class="tag">${q.stage}</span>` : ""}
+        ${isWrong ? `<span class="tag tag-wrong" id="wtag-${q.id}">已收錄錯題</span>` : ""}
+      </div>
+      <div class="question-text">${q.text}</div>
+      <div class="options-list">
+        ${q.options.map(opt => `
+          <button class="option-btn" onclick="checkAnswer(${q.id}, '${opt.key}', this)">
+            ${opt.text}
+          </button>
+        `).join("")}
+      </div>
+      <div class="actions">
+        <button class="btn-link btn-exp" onclick="toggleExp(${q.id})">解析</button>
+        <button class="btn-link btn-retry" onclick="retryQ(${q.id})">🔄 重新練習</button>
+        ${isWrong ? `<button class="btn-link btn-remove" onclick="removeWrong(${q.id})">移出租題庫</button>` : ""}
+      </div>
+      <div class="exp-box" id="exp-${q.id}">${q.exp}</div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function checkAnswer(qId, key, btn) {
+  const allList = QUESTION_BANK[currentSubject][currentYear];
+  const q = allList.find(i => i.id === qId);
+  const card = document.getElementById(`q-${qId}`);
+  const buttons = card.querySelectorAll(".option-btn");
+  buttons.forEach(b => b.disabled = true);
+
+  if (key === q.answer) {
+    btn.classList.add("correct");
+  } else {
+    btn.classList.add("wrong");
+    buttons.forEach(b => {
+      if (b.innerText.includes(`(${q.answer})`)) b.classList.add("correct");
+    });
+    addWrong(qId);
+  }
+  document.getElementById(`exp-${qId}`).style.display = "block";
+}
+
+function addWrong(qId) {
+  const exists = wrongList.some(item => item.subject === currentSubject && item.year === currentYear && item.id === qId);
+  if (!exists) {
+    wrongList.push({ subject: currentSubject, year: currentYear, id: qId });
+    localStorage.setItem("sw_master_wrong", JSON.stringify(wrongList));
+    updateWrongBadge();
+    const meta = document.querySelector(`#q-${qId} .question-meta`);
+    if (meta && !document.getElementById(`wtag-${qId}`)) {
+      const tag = document.createElement("span");
+      tag.className = "tag tag-wrong";
+      tag.id = `wtag-${qId}`;
+      tag.textContent = "已收錄錯題";
+      meta.appendChild(tag);
+    }
+  }
+}
+
+function removeWrong(qId) {
+  wrongList = wrongList.filter(item => !(item.subject === currentSubject && item.year === currentYear && item.id === qId));
+  localStorage.setItem("sw_master_wrong", JSON.stringify(wrongList));
+  updateWrongBadge();
+  if (currentFilter === "錯題庫") {
+    renderQuiz();
+  } else {
+    const tag = document.getElementById(`wtag-${qId}`);
+    if (tag) tag.remove();
+  }
+}
+
+function updateWrongBadge() {
+  const count = wrongList.filter(item => item.subject === currentSubject && item.year === currentYear).length;
+  const badge = document.getElementById("wrongBadge");
+  if (badge) badge.textContent = count;
+}
+
+function retryQ(qId) {
+  const card = document.getElementById(`q-${qId}`);
+  card.querySelectorAll(".option-btn").forEach(b => {
+    b.disabled = false;
+    b.classList.remove("correct", "wrong");
+  });
+  document.getElementById(`exp-${qId}`).style.display = "none";
+}
+
+function toggleExp(qId) {
+  const box = document.getElementById(`exp-${qId}`);
+  box.style.display = box.style.display === "block" ? "none" : "block";
+}
+
+window.onload = initApp;
+</script>
+</body>
+</html>
