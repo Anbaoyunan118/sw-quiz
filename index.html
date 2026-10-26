@@ -63,6 +63,7 @@
       font-weight: 500;
       cursor: pointer;
       transition: all 0.2s;
+      user-select: none;
     }
     .year-btn.active, .year-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
     .year-btn.all-years-btn { font-weight: 600; border-color: #52b788; }
@@ -127,7 +128,7 @@
       font-weight: 500;
     }
     .tag-wrong { background: var(--wrong-bg); color: var(--wrong); }
-    .question-text { font-size: 1.02rem; margin-bottom: 14px; font-weight: 500; }
+    .question-text { font-size: 1.02rem; margin-bottom: 14px; font-weight: 500; white-space: pre-line; }
     .options-list { display: flex; flex-direction: column; gap: 9px; margin-bottom: 14px; }
     .option-btn {
       text-align: left;
@@ -177,7 +178,7 @@
     </div>
 
     <div class="year-nav">
-      <span class="section-label">選擇考題年度：</span>
+      <span class="section-label">選擇考題年度（可複選多個年度）：</span>
       <div class="year-buttons" id="yearButtons"></div>
     </div>
 
@@ -192,22 +193,21 @@
     <span id="currentCountText" style="color: var(--muted); font-size: 0.88rem;"></span>
   </div>
 
-<main id="quizContainer"></main>
+  <main id="quizContainer"></main>
 </div>
 
 <!-- ============================================== -->
 <!-- 引用各科目資料夾底下的考卷檔 -->
 <!-- ============================================== -->
-<script src="hbse/hbse_112_1.js"></script>
-<script src="hbse/hbse_112_2.js"></script>
-<script src="hbse/hbse_113_1.js"></script>
-<script src="hbse/hbse_113_2.js"></script>
-<script src="hbse/hbse_114_1.js"></script>
-<script src="hbse/hbse_114_2.js"></script>
-<script src="hbse/hbse_115_1.js"></script>
-<script src="hbse/hbse_115_2.js"></script>
+<script src="hbse/hbse_112_1.js?v=20"></script>
+<script src="hbse/hbse_112_2.js?v=20"></script>
+<script src="hbse/hbse_113_1.js?v=20"></script>
+<script src="hbse/hbse_113_2.js?v=20"></script>
+<script src="hbse/hbse_114_1.js?v=20"></script>
+<script src="hbse/hbse_114_2.js?v=20"></script>
+<script src="hbse/hbse_115_1.js?v=20"></script>
+<script src="hbse/hbse_115_2.js?v=20"></script>
 
-  
 <script>
 // 自動將所有外部檔案彙整
 const QUESTION_BANK = { hbse: {}, sw: {}, direct: {}, research: {}, policy: {} };
@@ -218,7 +218,7 @@ const QUESTION_BANK = { hbse: {}, sw: {}, direct: {}, research: {}, policy: {} }
 
 let wrongList = JSON.parse(localStorage.getItem("sw_master_wrong") || "[]");
 let currentSubject = "hbse";
-let currentYear = "ALL";
+let selectedYears = []; // 改為陣列支援多選！
 let currentFilter = "全部";
 
 function initApp() { onSubjectChange(); }
@@ -234,39 +234,86 @@ function onSubjectChange() {
   yearContainer.innerHTML = "";
 
   const subjectData = QUESTION_BANK[currentSubject] || {};
-  const years = Object.keys(subjectData);
+  const allAvailableYears = Object.keys(subjectData);
 
-  if (years.length === 0) {
+  if (allAvailableYears.length === 0) {
     yearContainer.innerHTML = `<span style="color: var(--muted); font-size: 0.9rem;">此科目尚未匯入年度題目</span>`;
-    currentYear = "";
+    selectedYears = [];
   } else {
+    // 預設全選所有年度
+    selectedYears = [...allAvailableYears];
+
+    // 全選/全不選 切換按鈕
     const allBtn = document.createElement("button");
+    allBtn.id = "allYearsBtn";
     allBtn.className = "year-btn all-years-btn active";
-    allBtn.textContent = "📚 全部年度 (跨年度做題)";
-    allBtn.onclick = () => selectYear("ALL", allBtn);
+    allBtn.textContent = "📚 全部年度";
+    allBtn.onclick = () => toggleSelectAllYears(allAvailableYears);
     yearContainer.appendChild(allBtn);
 
-    years.forEach(y => {
+    // 各年份按鈕（支援多選）
+    allAvailableYears.forEach(y => {
       const btn = document.createElement("button");
-      btn.className = "year-btn";
+      btn.className = "year-btn active";
+      btn.setAttribute("data-year", y);
       btn.textContent = y;
-      btn.onclick = () => selectYear(y, btn);
+      btn.onclick = () => toggleSingleYear(y, allAvailableYears);
       yearContainer.appendChild(btn);
     });
-
-    currentYear = "ALL";
   }
 
   setupFilterNav();
   renderQuiz();
 }
 
-function selectYear(year, btnElement) {
-  currentYear = year;
-  document.querySelectorAll(".year-btn").forEach(b => b.classList.remove("active"));
-  if (btnElement) btnElement.classList.add("active");
+// 點擊「全部年度」按鈕的切換邏輯
+function toggleSelectAllYears(allYears) {
+  if (selectedYears.length === allYears.length) {
+    // 如果已經是全選狀態，點擊後保留最新的一個年度，避免變空
+    selectedYears = [allYears[allYears.length - 1]];
+  } else {
+    // 否則恢復全選
+    selectedYears = [...allYears];
+  }
+  updateYearButtonsUI(allYears);
   setupFilterNav();
   renderQuiz();
+}
+
+// 點擊單一年度按鈕的勾選/取消邏輯（複選核心）
+function toggleSingleYear(year, allYears) {
+  const index = selectedYears.indexOf(year);
+  if (index > -1) {
+    // 如果只有選一個，不允許取消（至少保留一個年度）
+    if (selectedYears.length === 1) return;
+    selectedYears.splice(index, 1);
+  } else {
+    selectedYears.push(year);
+  }
+  updateYearButtonsUI(allYears);
+  setupFilterNav();
+  renderQuiz();
+}
+
+// 刷新年度按鈕的高亮狀態
+function updateYearButtonsUI(allYears) {
+  const allBtn = document.getElementById("allYearsBtn");
+  if (allBtn) {
+    if (selectedYears.length === allYears.length) {
+      allBtn.classList.add("active");
+    } else {
+      allBtn.classList.remove("active");
+    }
+  }
+
+  document.querySelectorAll(".year-btn[data-year]").forEach(btn => {
+    const y = btn.getAttribute("data-year");
+    if (selectedYears.includes(y)) {
+      btn.classList.add("active");
+    } else {
+      btn.classList.remove("active");
+    }
+  });
 }
 
 function setupFilterNav() {
@@ -274,12 +321,11 @@ function setupFilterNav() {
   nav.innerHTML = "";
   currentFilter = "全部";
 
-  if (!currentYear) return;
+  if (selectedYears.length === 0) return;
 
+  // 計算目前勾選的年度內的所有錯題總數
   const subjectWrongCount = wrongList.filter(item => {
-    if (item.subject !== currentSubject) return false;
-    if (currentYear === "ALL") return true;
-    return item.year === currentYear;
+    return item.subject === currentSubject && selectedYears.includes(item.year);
   }).length;
 
   let stages = ["全部"];
@@ -314,18 +360,14 @@ function getCurrentQuestionPool() {
   const subjectData = QUESTION_BANK[currentSubject] || {};
   let pool = [];
 
-  if (currentYear === "ALL") {
-    Object.keys(subjectData).forEach(y => {
-      subjectData[y].forEach(q => {
-        pool.push({ ...q, sourceYear: y });
-      });
-    });
-  } else {
-    const list = subjectData[currentYear] || [];
+  // 自動彙整所有勾選年度的題目
+  selectedYears.forEach(y => {
+    const list = subjectData[y] || [];
     list.forEach(q => {
-      pool.push({ ...q, sourceYear: currentYear });
+      pool.push({ ...q, sourceYear: y });
     });
-  }
+  });
+
   return pool;
 }
 
@@ -335,17 +377,27 @@ function renderQuiz() {
   const countText = document.getElementById("currentCountText");
   container.innerHTML = "";
 
-  if (!currentYear) {
-    statusText.textContent = "此科目目前尚無資料";
+  if (selectedYears.length === 0) {
+    statusText.textContent = "請至少選擇一個年度";
     countText.textContent = "";
-    container.innerHTML = `<div class="empty-state">目前尚未新增試題，敬請期待！</div>`;
+    container.innerHTML = `<div class="empty-state">請在上方點選欲練習的考題年度！</div>`;
     return;
   }
 
   const allList = getCurrentQuestionPool();
   let displayList = [];
 
-  const yearLabel = currentYear === "ALL" ? "全部年度" : currentYear;
+  const subjectData = QUESTION_BANK[currentSubject] || {};
+  const totalYearsCount = Object.keys(subjectData).length;
+
+  let yearLabel = "";
+  if (selectedYears.length === totalYearsCount) {
+    yearLabel = "全部年度";
+  } else if (selectedYears.length === 1) {
+    yearLabel = selectedYears[0];
+  } else {
+    yearLabel = `已選 ${selectedYears.length} 個年度（${selectedYears.map(formatYearShort).join(", ")}）`;
+  }
 
   if (currentFilter === "錯題庫") {
     displayList = allList.filter(q => 
@@ -392,7 +444,7 @@ function renderQuiz() {
       <div class="actions">
         <button class="btn-link btn-exp" onclick="toggleExp('${uniqueKey}')">解析</button>
         <button class="btn-link btn-retry" onclick="retryQ('${uniqueKey}')">🔄 重新練習</button>
-        ${isWrong ? `<button class="btn-link btn-remove" onclick="removeWrong('${q.sourceYear}',${q.id})">移出租題庫</button>` : ""}
+        ${isWrong ? `<button class="btn-link btn-remove" onclick="removeWrong('${q.sourceYear}', ${q.id})">移出租題庫</button>` : ""}
       </div>
       <div class="exp-box" id="exp-${uniqueKey}">${q.exp}</div>
     `;
@@ -453,9 +505,7 @@ function removeWrong(year, qId) {
 
 function updateWrongBadge() {
   const count = wrongList.filter(item => {
-    if (item.subject !== currentSubject) return false;
-    if (currentYear === "ALL") return true;
-    return item.year === currentYear;
+    return item.subject === currentSubject && selectedYears.includes(item.year);
   }).length;
   const badge = document.getElementById("wrongBadge");
   if (badge) badge.textContent = count;
